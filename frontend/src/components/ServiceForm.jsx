@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CreateUserForm from "./CreateUserForm";
 import EditUserForm from "./EditUserForm";
 import axios from "axios";
-
+import api from "../utils/api";
 function ServiceForm() {
   const [availableServices, setAvailableServices] = useState([]);
   const [editUserId, setEditUserId] = useState(null);
@@ -15,8 +15,8 @@ function ServiceForm() {
     const decodeTokenAndSetUserId = async () => {
       try {
         if (token) {
-          const response = await axios.post(
-            "http://localhost:4000/api/decode-token",
+          const response = await api.post(
+            "/decode-token",
             {}, // Send the token to your backend for decoding
             {
               headers: {

@@ -93,7 +93,7 @@ function EditUserForm({ userId }) {
 
   return (
     <div className="container mx-auto mt-8 p-4 max-w-lg bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold mb-4">Edit User</h2>
+      <h2 className="text-2xl font-semibold mb-4">Edit Data</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">

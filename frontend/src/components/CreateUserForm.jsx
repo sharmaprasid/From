@@ -77,6 +77,7 @@ function CreateUserForm() {
             position: "top-right",
             autoClose: 3000, // Close the toast after 3 seconds
           });
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error creating user:", error);
