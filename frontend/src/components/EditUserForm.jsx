@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../utils/api";
 import { toast } from "react-toastify";
 import { editUserValidationSchema } from "./UserValidation";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,8 +15,8 @@ function EditUserForm({ userId }) {
   const [availableServices, setAvailableServices] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/services")
+    api
+      .get("/services")
       .then((response) => {
         setAvailableServices(response.data);
       })
@@ -25,8 +26,8 @@ function EditUserForm({ userId }) {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:4000/api/users/${userId}`)
+    api
+      .get(`/users/${userId}`)
       .then((response) => {
         const user = response.data;
         setUserData({
@@ -54,13 +55,12 @@ function EditUserForm({ userId }) {
     try {
       await editUserValidationSchema.validate(userData, { abortEarly: false });
 
-      axios
-        .put(`http://localhost:4000/api/users/${userId}`, userData)
+      api
+        .put(`/users/${userId}`, userData)
         .then((response) => {
-          console.log("User updated:", response.data);
+          console.log("Data updated:", response.data);
 
-          // Show a success toast message
-          toast.success("User updated successfully!", {
+          toast.success("Data updated successfully!", {
             position: "top-right",
             autoClose: 3000,
           });
@@ -154,7 +154,7 @@ function EditUserForm({ userId }) {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
             type="submit"
           >
-            Update User
+            Update
           </button>
         </div>
       </form>

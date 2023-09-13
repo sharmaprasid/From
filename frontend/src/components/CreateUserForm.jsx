@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../utils/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createUserValidationSchema } from "./UserValidation";
@@ -23,8 +24,8 @@ function CreateUserForm() {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/services")
+    api
+      .get("/services")
       .then((response) => {
         setAvailableServices(response.data);
       })
@@ -61,8 +62,8 @@ function CreateUserForm() {
         termsAndCondition: termsAccepted,
       };
 
-      axios
-        .post("http://localhost:4000/api/users", userData)
+      api
+        .post("/users", userData)
         .then((response) => {
           localStorage.setItem("jwtToken", response.data.token);
           setFormData({
@@ -72,7 +73,7 @@ function CreateUserForm() {
           setTermsAccepted(false);
 
           // Show a success toast message
-          toast.success("User created successfully!", {
+          toast.success("Data Recorded successfully!", {
             position: "top-right",
             autoClose: 3000, // Close the toast after 3 seconds
           });
